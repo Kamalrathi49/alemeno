@@ -14,6 +14,7 @@
                 </div>
                 <div class="table-responsive">
                     <table class="table table-centered w-100 dt-responsive nowrap" id="products-datatable">
+                        {% if foods %}
                         <thead class="table-light">
                             <tr>
                                 <th class="all">#</th>
@@ -43,6 +44,11 @@
                           </tr>
                           {% endfor %}
                         </tbody>
+                        {% else %}
+                        <large class="mt-4" style="display: flex; justify-content: center; align-items: center;">
+                            <em >No Data Available.</em>
+                          </large> 
+                        {% endif %}
                     </table>
                 </div>
             </div> <!-- end card-body-->
