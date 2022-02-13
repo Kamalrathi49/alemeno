@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Home {% endblock %}
+{% block content %}
+{% include 'add_kidsprofile.html' %}
+
+  <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-sm-4">
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addkidsprofile">Add New Kid</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-centered w-100 dt-responsive nowrap" id="products-datatable">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="all">#</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Parent's phone no.</th>
+                                <th>Parent's Email</th>
+                                <th>Food</th>
+                                <th style="width: 85px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          {% for kid in kids %}
+                          <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{ kid.name }}</td>
+                            <td>{{ kid.age }}</td>
+                            <td>{{ kid.parents_phone_number }}</td>
+                            <td>{{ kid.parents_email }}</td>
+                            <td><a class="text-decoration-none" href="{% url 'display-food' kid.id %}">food</a></td>
+                            <td class="table-action">
+                              {% include 'edit_kidsprofile.html' %}
+                              <btn style="color: blue;" class="btn action-icon" data-bs-toggle="modal" data-bs-target="#editkidsprofile{{kid.id}}"> <i class="mdi mdi-square-edit-outline"></i></btn>
+                              <a href="{% url 'delete-kid' kid.id %}" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                          </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col -->
+</div>
+{% endblock %}

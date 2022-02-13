@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Edit Food {% endblock %}
+{% block content %}
+
+  <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+                </div>
+                <div class="table-responsive">
+                   <form action="" method="POST">
+                       {% csrf_token %}
+                       {{ form.image | as_crispy_field }}<br>
+                       <img style="margin-left: 20%;" src="{{form.image.value}}" alt="image" width="50%" height="40%">
+                       {{ form.food_group | as_crispy_field }}<br>
+                       {{ form.is_approved | as_crispy_field }}<br>
+                       {{ form.approved_by | as_crispy_field }}<br>
+                       <div class="modal-footer">
+                           <a class="text-decoration-none" href="{% url 'display-food' kid.id %}">
+                               <button type="button" class="btn btn-secondary">Close</button>
+                           </a>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                       </div>
+                   </form>
+                </div>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col -->
+</div>
+{% endblock %}

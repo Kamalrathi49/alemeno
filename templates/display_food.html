@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Food {% endblock %}
+{% block content %}
+{% include 'add_food.html' %}
+  <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-sm-4">
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addfood">Add Food</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-centered w-100 dt-responsive nowrap" id="products-datatable">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="all">#</th>
+                                <th>Image</th>
+                                <th>Group</th>
+                                <th>Approved</th>
+                                <th>Approved By</th>
+                                <th>Created On</th>
+                                <th>Updated On</th>
+                                <th style="width: 85px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          {% for food in foods %}
+                          <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td><img class="rounded-circle" src="{{food.image}}" alt="food" height="40px" width="40px"></td>
+                            <td>{{ food.food_group }}</td>
+                            <td>{{ food.is_approved }}</td>
+                            <td>{{ food.approved_by }}</td>
+                            <td>{{ food.created_on }}</td>
+                            <td>{{ food.updated_on }}</td>
+                            <td class="table-action">
+                              <a href="{% url 'edit-food' kid.id food.id %}" class="action-icon"><i class="mdi mdi-square-edit-outline"></i></a>
+                              <a href="{% url 'delete-food' food.id kid.id %}" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                          </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col -->
+</div>
+{% endblock %}
