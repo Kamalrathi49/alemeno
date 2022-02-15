@@ -2,14 +2,15 @@
 {% load crispy_forms_tags %}
 {% block title %} Food {% endblock %}
 {% block content %}
-{% include 'add_food.html' %}
   <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <div class="row mb-2">
                     <div class="col-sm-4">
-                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addfood">Add Food</button>
+                      <a href="{% url 'add-food' kid.id %}">
+                        <button type="button" class="btn btn-primary">Add Food</button>
+                      </a>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -55,4 +56,6 @@
         </div> <!-- end card-->
     </div> <!-- end col -->
 </div>
+
+
 {% endblock %}

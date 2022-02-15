@@ -1,4 +1,4 @@
-# Kids Management
+# Kids Management System
 ### Demo - https://kids-management-app.herokuapp.com/
 ### Credentials for login - Username: admin and password: admin
 #### Code - https://github.com/Kamalrathi49/alemeno

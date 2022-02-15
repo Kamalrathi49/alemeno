@@ -1,26 +1,44 @@
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
-<div class="modal fade" id="addfood" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Food</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form action="{% url 'add-food' kid.id %}" method="post">
-                {% csrf_token %}
-                {{ addfoodform.image | as_crispy_field }}<br>
-                {{ addfoodform.food_group | as_crispy_field }}<br>
-                {{ addfoodform.is_approved | as_crispy_field }}<br>
-                {{ addfoodform.approved_by | as_crispy_field }}<br>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
-        </div>
-      </div>
-    </div>
-  </div>
+{% block title %} Add Food {% endblock %}
+{% block content %}
 
+  <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+                </div>
+                <div class="table-responsive">
+                  <form action="{% url 'add-food' kid.id %}"  method="post">
+                    {% csrf_token %}
+                    {{ form.image | as_crispy_field }}<br>
+                    <img id="result" style="margin-left: 20%; display: none;" src="" alt="" width="50%" height="40%">
+                    {{ form.food_group | as_crispy_field }}<br>
+                    {{ form.is_approved | as_crispy_field }}<br>
+                    {{ form.approved_by | as_crispy_field }}<br>
+                    <div class="modal-footer">
+                      <a class="text-decoration-none" href="{% url 'display-food' kid.id %}">
+                        <button type="button" class="btn btn-secondary">Cancel</button>
+                     </a>                      
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+                </div>
+            </div> 
+        </div>    
+    </div> 
+  </div>
+<script>
+  const source = document.getElementById('source');
+  const result = document.getElementById('result');
+
+  const inputHandler = function(e) {
+    result.src = e.target.value;
+    result.style.display = 'block'
+  }
   
+  source.addEventListener('input', inputHandler);
+  source.addEventListener('propertychange', inputHandler);
+</script>
+{% endblock %}

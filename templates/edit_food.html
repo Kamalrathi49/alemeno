@@ -13,13 +13,13 @@
                    <form action="" method="POST">
                        {% csrf_token %}
                        {{ form.image | as_crispy_field }}<br>
-                       <img style="margin-left: 20%;" src="{{form.image.value}}" alt="image" width="50%" height="40%">
+                       <img id="result1" style="margin-left: 20%;" src="{{form.image.value}}" alt="image" width="50%" height="40%">
                        {{ form.food_group | as_crispy_field }}<br>
                        {{ form.is_approved | as_crispy_field }}<br>
                        {{ form.approved_by | as_crispy_field }}<br>
                        <div class="modal-footer">
                            <a class="text-decoration-none" href="{% url 'display-food' kid.id %}">
-                               <button type="button" class="btn btn-secondary">Close</button>
+                               <button type="button" class="btn btn-secondary">cancel</button>
                            </a>
                         <button type="submit" class="btn btn-primary">Save</button>
                        </div>
@@ -29,4 +29,16 @@
         </div> <!-- end card-->
     </div> <!-- end col -->
 </div>
+
+<script>
+    const source = document.getElementById('source');
+    const result = document.getElementById('result1');
+  
+    const inputHandler = function(e) {
+      result.src = e.target.value;
+    }
+    
+    source.addEventListener('input', inputHandler);
+    source.addEventListener('propertychange', inputHandler);
+</script>
 {% endblock %}
